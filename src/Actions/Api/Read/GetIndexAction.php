@@ -45,6 +45,7 @@ class GetIndexAction extends AbstractAction
 	{
 		$index = new IndexEntity;
 		$this->addIndexUri( $index );
+		$this->addPasswordUri( $index );
 
 		$responderData = [
 			'index' => $index,
@@ -60,5 +61,14 @@ class GetIndexAction extends AbstractAction
 	private function addIndexUri( IndexEntity $index ): void
 	{
 		$index->uri = $this->getUriBuilder()->getIndexUri();
+	}
+
+	/**
+	 * Adds the URI of the password.
+	 * @param IndexEntity $index The index entity.
+	 */
+	private function addPasswordUri( IndexEntity $index ): void
+	{
+		$index->password = $this->getUriBuilder()->getPasswordUri();
 	}
 }
