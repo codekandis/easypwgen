@@ -18,4 +18,13 @@ class ApiUriBuilder extends AbstractUriBuilder
 	{
 		return $this->getUri( 'index' );
 	}
+
+	/**
+	 * Gets the URI of the password.
+	 * @return string The URI of the password.
+	 */
+	public function getPasswordUri(): string
+	{
+		return $this->getUri( 'password' );
+	}
 }
