@@ -10,4 +10,12 @@ use CodeKandis\Tiphy\Http\UriBuilders\AbstractUriBuilder;
  */
 class ApiUriBuilder extends AbstractUriBuilder
 {
+	/**
+	 * Gets the URI of the index.
+	 * @return string The URI of the index.
+	 */
+	public function getIndexUri(): string
+	{
+		return $this->getUri( 'index' );
+	}
 }
