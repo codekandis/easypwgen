@@ -15,4 +15,10 @@ class IndexEntity extends AbstractEntity
 	 * @var string
 	 */
 	public $uri = '';
+
+	/**
+	 * Stores the URI of the password.
+	 * @var string
+	 */
+	public $password = '';
 }
