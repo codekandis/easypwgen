@@ -10,4 +10,9 @@ use CodeKandis\Tiphy\Entities\AbstractEntity;
  */
 class IndexEntity extends AbstractEntity
 {
+	/**
+	 * Stores the URI of the index.
+	 * @var string
+	 */
+	public $uri = '';
 }
