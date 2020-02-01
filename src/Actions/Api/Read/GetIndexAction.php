@@ -44,11 +44,21 @@ class GetIndexAction extends AbstractAction
 	public function execute(): void
 	{
 		$index = new IndexEntity;
+		$this->addIndexUri( $index );
 
 		$responderData = [
 			'index' => $index,
 		];
 		$responder     = new JsonResponder( StatusCodes::OK, $responderData );
 		$responder->respond();
+	}
+
+	/**
+	 * Adds the URI of the index.
+	 * @param IndexEntity $index The index entity.
+	 */
+	private function addIndexUri( IndexEntity $index ): void
+	{
+		$index->uri = $this->getUriBuilder()->getIndexUri();
 	}
 }
