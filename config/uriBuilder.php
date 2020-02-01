@@ -6,6 +6,7 @@ return [
 	'host'         => 'api.easypwgen.codekandis',
 	'baseUri'      => '/',
 	'relativeUris' => [
-		'index' => ''
+		'index'    => '',
+		'password' => 'password'
 	]
 ];
