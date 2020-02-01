@@ -27,7 +27,10 @@
 		"source": "https://github.com/codekandis/easypwgen-api/tree/master"
 	},
 	"require": {
-		"php": "^7.3"
+		"php": "^7.3",
+		"codekandis/tiphy": "^0",
+		"codekandis/sentry-client": "dev-development",
+		"codekandis/tiphy-sentry-client-integration": "^0"
 	},
 	"require-dev": {
 		"roave/security-advisories": "dev-master",
