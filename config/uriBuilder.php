@@ -5,5 +5,7 @@ return [
 	'schema'       => 'https',
 	'host'         => 'api.easypwgen.codekandis',
 	'baseUri'      => '/',
-	'relativeUris' => []
+	'relativeUris' => [
+		'index' => ''
+	]
 ];
