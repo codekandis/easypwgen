@@ -9,7 +9,7 @@
 		"consonants",
 		"vocals"
 	],
-	"minimum-stability": "dev",
+	"minimum-stability": "stable",
 	"prefer-stable": true,
 	"license": "MIT",
 	"authors": [
@@ -27,15 +27,14 @@
 		"source": "https://github.com/codekandis/easypwgen-api/tree/master"
 	},
 	"require": {
-		"php": "^7.3",
+		"php": "^7.4",
 		"codekandis/tiphy": "^0",
-		"codekandis/sentry-client": "dev-development",
+		"codekandis/sentry-client": "^1",
 		"codekandis/tiphy-sentry-client-integration": "^0"
 	},
 	"require-dev": {
 		"roave/security-advisories": "dev-master",
-		"sensiolabs/security-checker": "^6",
-		"phpunit/phpunit": "^8"
+		"codekandis/phpunit": "^3"
 	},
 	"repositories": {
 	},
@@ -54,10 +53,5 @@
 				"tests/"
 			]
 		}
-	},
-	"scripts": {
-		"post-update-cmd": [
-			"[ ${COMPOSER_DEV_MODE} -eq 0 ] || vendor/bin/security-checker security:check composer.lock"
-		]
 	}
 }
