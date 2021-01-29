@@ -12,12 +12,35 @@ use function dirname;
 class ConfigurationRegistry extends AbstractConfigurationRegistry
 {
 	/**
-	 * {@inheritdoc}
+	 * @inheritDoc
 	 */
 	protected function initialize(): void
 	{
-		$this->setSentryClientConfigurationPath( dirname( __DIR__, 2 ) . '/config/sentryClient.php' );
-		$this->setRoutesConfigurationPath( dirname( __DIR__, 2 ) . '/config/routes.php' );
-		$this->setUriBuilderConfigurationPath( dirname( __DIR__, 2 ) . '/config/uriBuilder.php' );
+		$this->initializeSentryClientConfiguration();
+		$this->initializeRoutesConfiguration();
+		$this->initializeUriBuilderConfiguration();
+	}
+
+	private function initializeSentryClientConfiguration(): void
+	{
+		$this->setPlainSentryClientConfiguration(
+			require dirname( __DIR__, 2 ) . '/config/sentryClient.php'
+		);
+	}
+
+	private function initializeRoutesConfiguration(): void
+	{
+		$this->setPlainRoutesConfiguration(
+			( require dirname( __DIR__, 2 ) . '/config/routes.php' )
+			+ ( require __DIR__ . '/Plain/routes.php' )
+		);
+	}
+
+	private function initializeUriBuilderConfiguration(): void
+	{
+		$this->setPlainUriBuilderConfiguration(
+			( require dirname( __DIR__, 2 ) . '/config/uriBuilder.php' )
+			+ ( require __DIR__ . '/Plain/uriBuilder.php' )
+		);
 	}
 }
