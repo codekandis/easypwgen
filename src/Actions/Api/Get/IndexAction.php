@@ -1,9 +1,11 @@
 <?php declare( strict_types = 1 );
-namespace CodeKandis\EasyPwGenApi\Actions\Api\Read;
+namespace CodeKandis\EasyPwGenApi\Actions\Api\Get;
 
 use CodeKandis\EasyPwGenApi\Configurations\ConfigurationRegistry;
 use CodeKandis\EasyPwGenApi\Entities\IndexEntity;
+use CodeKandis\EasyPwGenApi\Entities\UriExtenders\IndexApiUriExtender;
 use CodeKandis\EasyPwGenApi\Http\UriBuilders\ApiUriBuilder;
+use CodeKandis\EasyPwGenApi\Http\UriBuilders\ApiUriBuilderInterface;
 use CodeKandis\Tiphy\Actions\AbstractAction;
 use CodeKandis\Tiphy\Http\Responses\JsonResponder;
 use CodeKandis\Tiphy\Http\Responses\StatusCodes;
@@ -14,27 +16,21 @@ use JsonException;
  * @package codekandis/easypwgen-api
  * @author Christian Ramelow <info@codekandis.net>
  */
-class GetIndexAction extends AbstractAction
+class IndexAction extends AbstractAction
 {
 	/**
 	 * Stores the API URI builder.
-	 * @var ApiUriBuilder
+	 * @var ApiUriBuilderInterface
 	 */
-	private $apiUriBuilder;
+	private ApiUriBuilderInterface $apiUriBuilder;
 
 	/**
 	 * Gets the API URI builder.
 	 * @return ApiUriBuilder The API URI builder.
 	 */
-	private function getUriBuilder(): ApiUriBuilder
+	private function getUriBuilder(): ApiUriBuilderInterface
 	{
-		if ( null === $this->apiUriBuilder )
-		{
-			$uriBuilderConfiguration = ConfigurationRegistry::_()->getUriBuilderConfiguration();
-			$this->apiUriBuilder     = new ApiUriBuilder( $uriBuilderConfiguration );
-		}
-
-		return $this->apiUriBuilder;
+		return $this->apiUriBuilder ?? $this->apiUriBuilder = new ApiUriBuilder( ConfigurationRegistry::_()->getUriBuilderConfiguration() );
 	}
 
 	/**
@@ -43,9 +39,8 @@ class GetIndexAction extends AbstractAction
 	 */
 	public function execute(): void
 	{
-		$index = new IndexEntity;
-		$this->addIndexUri( $index );
-		$this->addPasswordUri( $index );
+		$index = new IndexEntity();
+		$this->extendUris( $index );
 
 		$responderData = [
 			'index' => $index,
@@ -55,20 +50,13 @@ class GetIndexAction extends AbstractAction
 	}
 
 	/**
-	 * Adds the URI of the index.
+	 * Extends the URIs of the index entity.
 	 * @param IndexEntity $index The index entity.
 	 */
-	private function addIndexUri( IndexEntity $index ): void
+	private function extendUris( IndexEntity $index ): void
 	{
-		$index->uri = $this->getUriBuilder()->getIndexUri();
-	}
-
-	/**
-	 * Adds the URI of the password.
-	 * @param IndexEntity $index The index entity.
-	 */
-	private function addPasswordUri( IndexEntity $index ): void
-	{
-		$index->password = $this->getUriBuilder()->getPasswordUri();
+		$uriBuilder = $this->getUriBuilder();
+		( new IndexApiUriExtender( $uriBuilder, $index ) )
+			->extend();
 	}
 }
