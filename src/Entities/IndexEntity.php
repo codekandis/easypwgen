@@ -4,21 +4,21 @@ namespace CodeKandis\EasyPwGenApi\Entities;
 use CodeKandis\Tiphy\Entities\AbstractEntity;
 
 /**
- * Represents the entity of the index.
+ * Represents an index entity.
  * @package codekandis/easypwgen-api
  * @author Christian Ramelow <info@codekandis.net>
  */
 class IndexEntity extends AbstractEntity
 {
 	/**
-	 * Stores the URI of the index.
+	 * Stores the canonical URI of the index.
 	 * @var string
 	 */
-	public $uri = '';
+	public string $canonicalUri = '';
 
 	/**
-	 * Stores the URI of the password.
+	 * Stores the canonical URI of the password.
 	 * @var string
 	 */
-	public $password = '';
+	public string $canonicalPasswordUri = '';
 }
