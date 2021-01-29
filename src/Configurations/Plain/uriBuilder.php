@@ -2,7 +2,8 @@
 namespace CodeKandis\EasyPwGenApi\Configurations;
 
 return [
-	'schema'  => 'https',
-	'host'    => 'api.easypwgen.codekandis',
-	'baseUri' => '/'
+	'relativeUris' => [
+		'index'    => '',
+		'password' => 'password'
+	]
 ];
