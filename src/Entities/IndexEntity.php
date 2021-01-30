@@ -17,8 +17,8 @@ class IndexEntity extends AbstractEntity
 	public string $canonicalUri = '';
 
 	/**
-	 * Stores the canonical URI of the password.
+	 * Stores the URI of the password.
 	 * @var string
 	 */
-	public string $canonicalPasswordUri = '';
+	public string $passwordUri = '';
 }
