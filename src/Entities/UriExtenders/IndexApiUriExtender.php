@@ -46,10 +46,10 @@ class IndexApiUriExtender extends AbstractApiUriExtender
 	}
 
 	/**
-	 * Adds the canonical URI of the password.
+	 * Adds the URI of the password.
 	 */
 	private function addPasswordUri(): void
 	{
-		$this->index->canonicalPasswordUri = $this->apiUriBuilder->buildPasswordUri();
+		$this->index->passwordUri = $this->apiUriBuilder->buildPasswordUri();
 	}
 }
