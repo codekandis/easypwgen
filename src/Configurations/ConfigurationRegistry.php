@@ -24,23 +24,24 @@ class ConfigurationRegistry extends AbstractConfigurationRegistry
 	private function initializeSentryClientConfiguration(): void
 	{
 		$this->setPlainSentryClientConfiguration(
-			require dirname( __DIR__, 2 ) . '/config/sentryClient.php'
+			( require __DIR__ . '/Plain/sentryClient.php' )
+			+ ( require dirname( __DIR__, 2 ) . '/config/sentryClient.php' )
 		);
 	}
 
 	private function initializeRoutesConfiguration(): void
 	{
 		$this->setPlainRoutesConfiguration(
-			( require dirname( __DIR__, 2 ) . '/config/routes.php' )
-			+ ( require __DIR__ . '/Plain/routes.php' )
+			( require __DIR__ . '/Plain/routes.php' )
+			+ ( require dirname( __DIR__, 2 ) . '/config/routes.php' )
 		);
 	}
 
 	private function initializeUriBuilderConfiguration(): void
 	{
 		$this->setPlainUriBuilderConfiguration(
-			( require dirname( __DIR__, 2 ) . '/config/uriBuilder.php' )
-			+ ( require __DIR__ . '/Plain/uriBuilder.php' )
+			( require __DIR__ . '/Plain/uriBuilder.php' )
+			+ ( require dirname( __DIR__, 2 ) . '/config/uriBuilder.php' )
 		);
 	}
 }
