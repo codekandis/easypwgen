@@ -2,5 +2,5 @@
 namespace CodeKandis\EasyPwGenApi\Configurations\Plain;
 
 return [
-	'release' => 'dev-development'
+	'release' => '0.3.0'
 ];
