@@ -1,47 +1,54 @@
 <?php declare( strict_types = 1 );
 namespace CodeKandis\EasyPwGenApi\Configurations;
 
-use CodeKandis\TiphySentryClientIntegration\Configurations\AbstractConfigurationRegistry;
+use CodeKandis\Configurations\PlainConfigurationLoader;
+use CodeKandis\Tiphy\Configurations\AbstractConfigurationRegistry;
+use CodeKandis\Tiphy\Configurations\RoutesConfiguration;
+use CodeKandis\Tiphy\Configurations\UriBuilderConfiguration;
+use CodeKandis\TiphySentryClientIntegration\Configurations\ConfigurationRegistryTrait as SentryClientConfigurationRegistryTrait;
+use CodeKandis\TiphySentryClientIntegration\Configurations\SentryClientConfiguration;
 use function dirname;
 
 /**
- * Represents the configuration registry of the API.
+ * Represents the configuration registry.
  * @package codekandis/easypwgen-api
  * @author Christian Ramelow <info@codekandis.net>
  */
-class ConfigurationRegistry extends AbstractConfigurationRegistry
+class ConfigurationRegistry extends AbstractConfigurationRegistry implements ConfigurationRegistryInterface
 {
+	use SentryClientConfigurationRegistryTrait;
+
 	/**
-	 * @inheritDoc
+	 * Creates the singleton instance of the configuration registry.
+	 * @return ConfigurationRegistryInterface The singleton instance of the configuration registry.
+	 */
+	public static function _(): ConfigurationRegistryInterface
+	{
+		return parent::_();
+	}
+
+	/**
+	 * {@inheritDoc}
 	 */
 	protected function initialize(): void
 	{
-		$this->initializeSentryClientConfiguration();
-		$this->initializeRoutesConfiguration();
-		$this->initializeUriBuilderConfiguration();
-	}
-
-	private function initializeSentryClientConfiguration(): void
-	{
-		$this->setPlainSentryClientConfiguration(
-			( require __DIR__ . '/Plain/sentryClient.php' )
-			+ ( require dirname( __DIR__, 2 ) . '/config/sentryClient.php' )
+		$this->sentryClientConfiguration = new SentryClientConfiguration(
+			( new PlainConfigurationLoader() )
+				->load( __DIR__ . '/Plain', 'sentryClient' )
+				->load( dirname( __DIR__, 2 ) . '/config', 'sentryClient' )
+				->getPlainConfiguration()
 		);
-	}
-
-	private function initializeRoutesConfiguration(): void
-	{
-		$this->setPlainRoutesConfiguration(
-			( require __DIR__ . '/Plain/routes.php' )
-			+ ( require dirname( __DIR__, 2 ) . '/config/routes.php' )
+		$this->routesConfiguration       = new RoutesConfiguration(
+			( new PlainConfigurationLoader() )
+				->load( __DIR__ . '/Plain', 'routes' )
+				->load( dirname( __DIR__, 2 ) . '/config', 'routes' )
+				->getPlainConfiguration()
 		);
-	}
-
-	private function initializeUriBuilderConfiguration(): void
-	{
-		$this->setPlainUriBuilderConfiguration(
-			( require __DIR__ . '/Plain/uriBuilder.php' )
-			+ ( require dirname( __DIR__, 2 ) . '/config/uriBuilder.php' )
+		$this->uriBuilderConfiguration   = new UriBuilderConfiguration(
+			( new PlainConfigurationLoader() )
+				->load( __DIR__ . '/Plain', 'uriBuilder' )
+				->load( dirname( __DIR__, 2 ) . '/config', 'uriBuilder' )
+				->getPlainConfiguration()
 		);
 	}
 }

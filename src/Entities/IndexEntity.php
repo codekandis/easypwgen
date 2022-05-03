@@ -1,7 +1,7 @@
 <?php declare( strict_types = 1 );
 namespace CodeKandis\EasyPwGenApi\Entities;
 
-use CodeKandis\Tiphy\Entities\AbstractEntity;
+use CodeKandis\Entities\AbstractEntity;
 
 /**
  * Represents an index entity.
