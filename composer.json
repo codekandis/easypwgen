@@ -28,6 +28,7 @@
 	},
 	"require": {
 		"php": "^7.4",
+		"codekandis/configurations": "^0",
 		"codekandis/tiphy": "^0",
 		"codekandis/sentry-client": "^1",
 		"codekandis/tiphy-sentry-client-integration": "^0"
